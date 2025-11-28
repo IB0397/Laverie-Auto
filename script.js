@@ -1,61 +1,37 @@
-const machines = document.querySelectorAll('.machine');
-let selectedMachine = null;
+function startWashingMachine() {
+    const machine = document.getElementById("machineSelect").value;
+    const mode = document.getElementById("washMode").value;
+    const payment = document.getElementById("paymentSelect").value;
+    const result = document.getElementById("washResult");
 
-const selectedMachineSpan = document.getElementById('selected-machine');
-const payButton = document.getElementById('pay-button');
-const screen = document.getElementById('screen');
+    if (!machine || !mode || !payment) {
+        result.innerHTML = "⚠️ Veuillez remplir toutes les options.";
+        return;
+    }
 
-// Fonction de voix
-function speak(text) {
-  const utterance = new SpeechSynthesisUtterance(text);
-  utterance.lang = 'fr-FR';
-  speechSynthesis.speak(utterance);
+    let duration = 20;
+    let price = 50000;
+
+    if (mode === "rapide") duration = 15;
+    if (mode === "normal") duration = 20;
+    if (mode === "intensif") duration = 30;
+
+    result.innerHTML =
+        `✔ Machine lancée<br>🕒 Durée : ${duration} min<br💰 Prix : ${price} GNF<br>💳 Paiement : ${payment}`;
 }
 
-// Accueil vocal
-window.onload = () => {
-  speak("Bienvenue dans votre laverie automatique interactive. Sélectionnez une machine pour commencer.");
-};
+function startDryer() {
+    const dryTime = document.getElementById("dryTime").value;
+    const payment = document.getElementById("paymentDryer").value;
+    const result = document.getElementById("dryerResult");
 
-// Sélection d'une machine
-machines.forEach(m => {
-  const btn = m.querySelector('.select-btn');
-  const status = m.querySelector('.status');
-
-  btn.addEventListener('click', () => {
-    if(status.textContent !== "Prête") {
-      screen.textContent = "Machine non disponible.";
-      speak("Machine non disponible.");
-      return;
+    if (!dryTime || !payment) {
+        result.innerHTML = "⚠️ Veuillez remplir toutes les options.";
+        return;
     }
-    selectedMachine = m;
-    selectedMachineSpan.textContent = `${m.dataset.id} (${m.dataset.type})`;
-    payButton.disabled = false;
-    screen.textContent = `Machine ${m.dataset.id} sélectionnée. Veuillez payer pour lancer.`;
-    speak(`Machine ${m.dataset.id} sélectionnée. Veuillez payer pour lancer.`);
-  });
-});
 
-// Paiement & lancement
-payButton.addEventListener('click', () => {
-  if(!selectedMachine) return;
+    const price = 20000;
 
-  const m = selectedMachine;
-  const status = m.querySelector('.status');
-
-  payButton.disabled = true;
-  selectedMachine = null;
-  selectedMachineSpan.textContent = "Aucune";
-
-  status.textContent = "En cours";
-  screen.textContent = `La machine ${m.dataset.id} démarre...`;
-  speak(`Paiement reçu. La machine ${m.dataset.id} démarre.`);
-
-  const duration = m.dataset.type === 'washer' ? 15000 : 10000;
-
-  setTimeout(() => {
-    status.textContent = "Prête";
-    screen.textContent = `Cycle terminé pour la machine ${m.dataset.id}.`;
-    speak(`Cycle terminé pour la machine ${m.dataset.id}.`);
-  }, duration);
-});
+    result.innerHTML =
+        `✔ Séchoir lancé<br>🔥 Temps : ${dryTime} min<br>💰 Prix : ${price} GNF<br>💳 Paiement : ${payment}`;
+}
