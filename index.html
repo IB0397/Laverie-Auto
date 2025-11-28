@@ -1,72 +1,75 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Laverie Automatique Pro</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>Laverie Automatique</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+    <div class="background"></div>
 
-  <div class="container">
-    <header>
-      <h1>Laverie Automatique NakonMory</h1>
-    </header>
+    <div class="container">
+        <h1>💦 Laverie Automatique Pro</h1>
 
-    <!-- Lave-linge -->
-    <section class="machines-section">
-      <h2>Lave-linge</h2>
-      <div class="machine-list" id="washers">
-        <div class="machine" data-id="W1" data-type="washer">
-          <img src="assets/washer.png" alt="Machine W1">
-          <p>Machine W1</p>
-          <p>Status: <span class="status">Prête</span></p>
-          <button class="select-btn">Sélectionner</button>
+        <div class="section">
+            <h2>🧺 Sélection de la machine à laver</h2>
+            <label>Choisir une machine :</label>
+            <select id="machineSelect">
+                <option value="">-- Sélectionnez --</option>
+                <option value="petite">Petite machine — 50 000 GNF (20 min)</option>
+            </select>
+
+            <label>Mode de lavage :</label>
+            <select id="washMode">
+                <option value="">-- Mode --</option>
+                <option value="rapide">Rapide (15 min)</option>
+                <option value="normal">Normal (20 min)</option>
+                <option value="intensif">Intensif (30 min)</option>
+            </select>
+
+            <label>Moyen de paiement :</label>
+            <select id="paymentSelect">
+                <option value="">-- Choisissez --</option>
+                <option value="orange">Orange Money</option>
+                <option value="mtn">MTN Money</option>
+                <option value="visa">Carte VISA</option>
+                <option value="cash">Espèces</option>
+            </select>
+
+            <button onclick="startWashingMachine()">Lancer la machine</button>
+
+            <p id="washResult"></p>
         </div>
-        <div class="machine" data-id="W2" data-type="washer">
-          <img src="assets/washer.png" alt="Machine W2">
-          <p>Machine W2</p>
-          <p>Status: <span class="status">Prête</span></p>
-          <button class="select-btn">Sélectionner</button>
+
+        <hr>
+
+        <div class="section">
+            <h2>🔥 Séchoir</h2>
+
+            <label>Choisir le temps de séchage :</label>
+            <select id="dryTime">
+                <option value="">-- Temps --</option>
+                <option value="10">10 min — 20 000 GNF</option>
+                <option value="15">15 min — 20 000 GNF</option>
+                <option value="20">20 min — 20 000 GNF</option>
+            </select>
+
+            <label>Moyen de paiement :</label>
+            <select id="paymentDryer">
+                <option value="">-- Choisissez --</option>
+                <option value="orange">Orange Money</option>
+                <option value="mtn">MTN Money</option>
+                <option value="visa">Carte VISA</option>
+                <option value="cash">Espèces</option>
+            </select>
+
+            <button onclick="startDryer()">Lancer le séchoir</button>
+
+            <p id="dryerResult"></p>
         </div>
-      </div>
-    </section>
+    </div>
 
-    <!-- Séche-linge -->
-    <section class="machines-section">
-      <h2>Sèche-linge</h2>
-      <div class="machine-list" id="dryers">
-        <div class="machine" data-id="D1" data-type="dryer">
-          <img src="assets/dryer.png" alt="Sèche-linge D1">
-          <p>Sèche-linge D1</p>
-          <p>Status: <span class="status">Prête</span></p>
-          <button class="select-btn">Sélectionner</button>
-        </div>
-        <div class="machine" data-id="D2" data-type="dryer">
-          <img src="assets/dryer.png" alt="Sèche-linge D2">
-          <p>Sèche-linge D2</p>
-          <p>Status: <span class="status">Prête</span></p>
-          <button class="select-btn">Sélectionner</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- Borne de paiement -->
-    <section class="payment-section">
-      <h2>Borne de Paiement</h2>
-      <p>Machine sélectionnée : <span id="selected-machine">Aucune</span></p>
-      <button id="pay-button" disabled>Payer & Lancer</button>
-    </section>
-
-    <!-- Écran de contrôle -->
-    <section class="interaction">
-      <h2>Écran de contrôle</h2>
-      <div id="screen"><p>Bienvenue! Sélectionnez une machine pour commencer.</p></div>
-    </section>
-
-  </div>
-
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
-
