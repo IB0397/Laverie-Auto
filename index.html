@@ -1,74 +1,106 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Laverie Automatique Multi-Laveries</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>Laverie Automatique Premium</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="background"></div>
 
-  <header>
-    <h1>💦 Laverie Automatique</h1>
-    <p>Choisissez votre laverie et lancez les machines comme en vrai !</p>
-  </header>
+    <div class="background"></div>
 
-  <div class="container">
+    <header>
+        <h1>💦 Laverie Automatique Premium</h1>
+        <p>Choisissez votre laverie, vos machines et lancez le cycle !</p>
+    </header>
 
+    <!-- SÉLECTION DE LA LAVERIE -->
     <div class="section">
-      <h2>🏢 Sélection de la laverie</h2>
-      <select id="laundrySelect"></select>
+        <h2>🏙️ Sélectionnez votre laverie</h2>
+        <select id="laundrySelect" onchange="changeLaundry()">
+            <option value="">-- Sélectionnez --</option>
+            <option value="conakry-centre">Conakry Centre</option>
+            <option value="conakry-riviera">Conakry Riviera</option>
+            <option value="kindia">Kindia</option>
+            <option value="labé">Labé</option>
+            <option value="kankan">Kankan</option>
+        </select>
+        <p id="currentLaundry">Aucune laverie sélectionnée</p>
     </div>
 
-    <div class="section" id="machinesSection" style="display:none">
-      <h2>Machines disponibles</h2>
-      <div id="machinesList" class="machine-grid"></div>
+    <!-- GRID DES MACHINES -->
+    <div class="machine-grid">
+
+        <div class="machine-card" onclick="openWasherModal()">
+            <img src="assets/washer.png" class="machine-img">
+            <h3>Machine à laver</h3>
+            <p>50 000 GNF</p>
+            <span class="start-btn">Configurer</span>
+        </div>
+
+        <div class="machine-card" onclick="openDryerModal()">
+            <img src="assets/dryer.png" class="machine-img">
+            <h3>Séchoir</h3>
+            <p>20 000 GNF</p>
+            <span class="start-btn">Configurer</span>
+        </div>
+
     </div>
 
-    <div class="section" id="controlPanel" style="display:none">
-      <h2>Contrôle de la machine</h2>
-      <div id="controlArea"></div>
+    <!-- MODAL MACHINE À LAVER -->
+    <div class="modal" id="washerModal">
+        <div class="modal-content">
+            <h2>Configuration Machine à laver</h2>
+
+            <label>Mode de lavage :</label>
+            <select id="washMode">
+                <option value="rapide">Rapide — 15 min</option>
+                <option value="normal">Normal — 20 min</option>
+                <option value="intensif">Intensif — 30 min</option>
+            </select>
+
+            <label>Moyen de paiement :</label>
+            <select id="paymentWasher">
+                <option value="orange">Orange Money</option>
+                <option value="mtn">MTN Money</option>
+                <option value="visa">Carte VISA</option>
+                <option value="cash">Espèces</option>
+            </select>
+
+            <button onclick="startWasher()">Lancer la machine</button>
+            <p id="washerStatus"></p>
+
+            <div class="close" onclick="closeWasherModal()">Fermer</div>
+        </div>
     </div>
 
-  </div>
+    <!-- MODAL SÉCHOIR -->
+    <div class="modal" id="dryerModal">
+        <div class="modal-content">
+            <h2>Configuration Séchoir</h2>
 
-  <script src="script.js"></script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <title>Laverie Automatique Multi-Laveries</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <div class="background"></div>
+            <label>Durée du séchage :</label>
+            <select id="dryTime">
+                <option value="10">10 min</option>
+                <option value="15">15 min</option>
+                <option value="20">20 min</option>
+            </select>
 
-  <header>
-    <h1>💦 Laverie Automatique</h1>
-    <p>Choisissez votre laverie et lancez les machines comme en vrai !</p>
-  </header>
+            <label>Moyen de paiement :</label>
+            <select id="paymentDryer">
+                <option value="orange">Orange Money</option>
+                <option value="mtn">MTN Money</option>
+                <option value="visa">Carte VISA</option>
+                <option value="cash">Espèces</option>
+            </select>
 
-  <div class="container">
+            <button onclick="startDryer()">Lancer le séchoir</button>
+            <p id="dryerStatus"></p>
 
-    <div class="section">
-      <h2>🏢 Sélection de la laverie</h2>
-      <select id="laundrySelect"></select>
+            <div class="close" onclick="closeDryerModal()">Fermer</div>
+        </div>
     </div>
 
-    <div class="section" id="machinesSection" style="display:none">
-      <h2>Machines disponibles</h2>
-      <div id="machinesList" class="machine-grid"></div>
-    </div>
-
-    <div class="section" id="controlPanel" style="display:none">
-      <h2>Contrôle de la machine</h2>
-      <div id="controlArea"></div>
-    </div>
-
-  </div>
-
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
