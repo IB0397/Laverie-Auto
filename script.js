@@ -1,37 +1,61 @@
-function startWashingMachine() {
-    const machine = document.getElementById("machineSelect").value;
-    const mode = document.getElementById("washMode").value;
-    const payment = document.getElementById("paymentSelect").value;
-    const result = document.getElementById("washResult");
-
-    if (!machine || !mode || !payment) {
-        result.innerHTML = "⚠️ Veuillez remplir toutes les options.";
-        return;
-    }
-
-    let duration = 20;
-    let price = 50000;
-
-    if (mode === "rapide") duration = 15;
-    if (mode === "normal") duration = 20;
-    if (mode === "intensif") duration = 30;
-
-    result.innerHTML =
-        `✔ Machine lancée<br>🕒 Durée : ${duration} min<br💰 Prix : ${price} GNF<br>💳 Paiement : ${payment}`;
+function openWasherModal() {
+    document.getElementById("washerModal").style.display = "flex";
+}
+function closeWasherModal() {
+    document.getElementById("washerModal").style.display = "none";
 }
 
+function openDryerModal() {
+    document.getElementById("dryerModal").style.display = "flex";
+}
+function closeDryerModal() {
+    document.getElementById("dryerModal").style.display = "none";
+}
+
+
+// MACHINE À LAVER
+function startWasher() {
+    let mode = document.getElementById("washMode").value;
+    let pay = document.getElementById("paymentWasher").value;
+
+    let duration = mode === "rapide" ? 15 :
+                   mode === "normal" ? 20 : 30;
+
+    let status = document.getElementById("washerStatus");
+    status.innerHTML = "⏳ Machine en cours…";
+
+    startCountdown(duration, status);
+}
+
+
+// SÉCHOIR
 function startDryer() {
-    const dryTime = document.getElementById("dryTime").value;
-    const payment = document.getElementById("paymentDryer").value;
-    const result = document.getElementById("dryerResult");
+    let dryTime = parseInt(document.getElementById("dryTime").value);
+    let pay = document.getElementById("paymentDryer").value;
 
-    if (!dryTime || !payment) {
-        result.innerHTML = "⚠️ Veuillez remplir toutes les options.";
-        return;
-    }
+    let status = document.getElementById("dryerStatus");
+    status.innerHTML = "🔥 Séchage en cours…";
 
-    const price = 20000;
+    startCountdown(dryTime, status);
+}
 
-    result.innerHTML =
-        `✔ Séchoir lancé<br>🔥 Temps : ${dryTime} min<br>💰 Prix : ${price} GNF<br>💳 Paiement : ${payment}`;
+
+// COMPTE À REBOURS GLOBAL
+function startCountdown(minutes, element) {
+    let seconds = minutes * 60;
+
+    let timer = setInterval(() => {
+
+        let m = Math.floor(seconds / 60);
+        let s = seconds % 60;
+
+        element.innerHTML = `🕒 Temps restant : ${m} min ${s} s`;
+
+        if (seconds <= 0) {
+            clearInterval(timer);
+            element.innerHTML = "✔ Terminé ! Vos vêtements sont prêts.";
+        }
+
+        seconds--;
+    }, 1000);
 }
