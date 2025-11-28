@@ -2,62 +2,82 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Laverie Automatique</title>
+    <title>Laverie Automatique Pro</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+
     <div class="background"></div>
 
-    <div class="container">
-        <h1>💦 Laverie Automatique Pro</h1>
+    <header>
+        <h1>💦 Laverie Automatique Premium</h1>
+        <p>Choisissez votre machine, votre mode, payez, lancez — comme en vrai.</p>
+    </header>
 
-        <div class="section">
-            <h2>🧺 Sélection de la machine à laver</h2>
-            <label>Choisir une machine :</label>
-            <select id="machineSelect">
-                <option value="">-- Sélectionnez --</option>
-                <option value="petite">Petite machine — 50 000 GNF (20 min)</option>
-            </select>
+    <div class="machine-grid">
+
+        <!-- MACHINE À LAVER -->
+        <div class="machine-card" onclick="openWasherModal()">
+            <img class="machine-img" src="assets/washer.png">
+            <h3>Machine à laver</h3>
+            <p>Petite machine — 50 000 GNF</p>
+            <span class="start-btn">Configurer</span>
+        </div>
+
+        <!-- SÉCHOIR -->
+        <div class="machine-card" onclick="openDryerModal()">
+            <img class="machine-img" src="assets/dryer.png">
+            <h3>Séchoir</h3>
+            <p>20 000 GNF</p>
+            <span class="start-btn">Configurer</span>
+        </div>
+
+    </div>
+
+
+    <!-- MODAL MACHINE À LAVER -->
+    <div class="modal" id="washerModal">
+        <div class="modal-content">
+            <h2>Configuration de la machine à laver</h2>
 
             <label>Mode de lavage :</label>
             <select id="washMode">
-                <option value="">-- Mode --</option>
-                <option value="rapide">Rapide (15 min)</option>
-                <option value="normal">Normal (20 min)</option>
-                <option value="intensif">Intensif (30 min)</option>
+                <option value="rapide">Rapide — 15 min</option>
+                <option value="normal">Normal — 20 min</option>
+                <option value="intensif">Intensif — 30 min</option>
             </select>
 
             <label>Moyen de paiement :</label>
-            <select id="paymentSelect">
-                <option value="">-- Choisissez --</option>
+            <select id="paymentWasher">
                 <option value="orange">Orange Money</option>
                 <option value="mtn">MTN Money</option>
                 <option value="visa">Carte VISA</option>
                 <option value="cash">Espèces</option>
             </select>
 
-            <button onclick="startWashingMachine()">Lancer la machine</button>
+            <button onclick="startWasher()">Lancer la machine</button>
+            <p id="washerStatus"></p>
 
-            <p id="washResult"></p>
+            <div class="close" onclick="closeWasherModal()">Fermer</div>
         </div>
+    </div>
 
-        <hr>
 
-        <div class="section">
-            <h2>🔥 Séchoir</h2>
+    <!-- MODAL SÉCHOIR -->
+    <div class="modal" id="dryerModal">
+        <div class="modal-content">
+            <h2>Configuration du séchoir</h2>
 
-            <label>Choisir le temps de séchage :</label>
+            <label>Durée du séchage :</label>
             <select id="dryTime">
-                <option value="">-- Temps --</option>
-                <option value="10">10 min — 20 000 GNF</option>
-                <option value="15">15 min — 20 000 GNF</option>
-                <option value="20">20 min — 20 000 GNF</option>
+                <option value="10">10 min</option>
+                <option value="15">15 min</option>
+                <option value="20">20 min</option>
             </select>
 
             <label>Moyen de paiement :</label>
             <select id="paymentDryer">
-                <option value="">-- Choisissez --</option>
                 <option value="orange">Orange Money</option>
                 <option value="mtn">MTN Money</option>
                 <option value="visa">Carte VISA</option>
@@ -65,11 +85,14 @@
             </select>
 
             <button onclick="startDryer()">Lancer le séchoir</button>
+            <p id="dryerStatus"></p>
 
-            <p id="dryerResult"></p>
+            <div class="close" onclick="closeDryerModal()">Fermer</div>
         </div>
     </div>
 
+
     <script src="script.js"></script>
+
 </body>
 </html>
